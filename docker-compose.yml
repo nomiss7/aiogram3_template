@@ -1,0 +1,13 @@
+version: '3'
+services:
+  telegram_bot:
+    build: audio_books_bot
+    environment:
+      - BOT_TOKEN=6842685829:AAHeLZ8Y2B5EqaEBk3Gb0y5tIehhdD5wV3I
+      - CHANNEL_URL=https://t.me/+-OgtzDsXOcQxMTA0
+      - CHANNEL_ID=-1002086636242
+    restart: always
+    volumes:
+      - .:/app
+
+
