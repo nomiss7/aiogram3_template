@@ -1,5 +1,4 @@
-from typing import Callable, Dict, Any, Awaitable
-
+from typing import Any, Awaitable, Callable, Dict
 
 from aiogram import BaseMiddleware
 from aiogram.types import Message
@@ -17,4 +16,3 @@ class ConfigMiddleware(BaseMiddleware):
     ) -> Any:
         data["config"] = self.config
         return await handler(event, data)
-

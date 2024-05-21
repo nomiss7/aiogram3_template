@@ -30,11 +30,7 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
-
-# Translations
-*.mo
-*.pot
-
+logging.txt
 
 # pyenv
 .python-version
@@ -50,12 +46,13 @@ pip-delete-this-directory.txt
 __pypackages__/
 
 # DataBase
-.db
+db.db
 
 # Environments
 .venv
 env/
 venv/
+myvenv/
 ENV/
 env.bak/
 venv.bak/
