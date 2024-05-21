@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import List
 
 from environs import Env
 
@@ -10,8 +11,10 @@ class TgBot:
     """
 
     token: str
-    channel_url: str
-    channel_id: int
+    redis_host: str
+    redis_port: int
+    group_id: int
+    admins_id: List[int]
 
     @staticmethod
     def from_env(env: Env):
@@ -19,9 +22,17 @@ class TgBot:
         Creates the TgBot object from environment variables.
         """
         token = env.str("BOT_TOKEN")
-        channel_url = env.str("CHANNEL_URL")
-        channel_id = env.int("CHANNEL_ID")
-        return TgBot(token=token, channel_url=channel_url, channel_id=channel_id)
+        group_id = env.int("GROUP_ID")
+        admins_id = env.list("ADMINS_ID")
+        redis_host = env.str("REDIS_HOST")
+        redis_port = env.int("REDIS_PORT")
+        return TgBot(
+            token=token,
+            group_id=group_id,
+            admins_id=list(map(int, admins_id)),
+            redis_host=redis_host,
+            redis_port=redis_port,
+        )
 
 
 @dataclass
@@ -51,7 +62,7 @@ def load_config(path: str = None) -> Config:
     # Create an Env object.
     # The Env object will be used to read environment variables.
     env = Env()
-    env.read_env(path)
+    env.read_env(path=path)
 
     return Config(
         tg_bot=TgBot.from_env(env),

@@ -1,13 +1,21 @@
 version: '3'
 services:
   telegram_bot:
-    build: audio_books_bot
+    build: .
     environment:
-      - BOT_TOKEN=6842685829:AAHeLZ8Y2B5EqaEBk3Gb0y5tIehhdD5wV3I
-      - CHANNEL_URL=https://t.me/+-OgtzDsXOcQxMTA0
-      - CHANNEL_ID=-1002086636242
+      - BOT_TOKEN=6959137676:AAFOwrzfU4IL0EKj-hjCRCQSaWBhjS8TaYw
+      - GROUP_ID=-4263977900
+      - ADMINS_ID=972847950,996812211,640846280,732020026,1159695964
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     restart: always
     volumes:
-      - .:/app
+      - ./db.db:/app/db.db
+    depends_on:
+      - redis
 
-
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    restart: always
